@@ -6,20 +6,20 @@
 
 void multiplicacion(int **a, int **b, int **c, int n){
 	
-	#pragma omp parallel num_threads(4) 
-	{
-		int i, j, k; 
-		#pragma omp for
-		for (i = 0; i < n; i++){
-			for(j = 0; j < n; j++){
-				for (k = 0; k < n; k++){
-					c[i][j] += a[i][k]*b[k][j];                               
-				}          
-			}
+	int i, j, k;
+	omp_set_num_threads(4);
+
+ 	#pragma omp distribute parallel for private(j, k)
+	for (i = 0; i < n; i++){
+		for(j = 0; j < n; j++){
+			for(k = 0; k < n; k++){
+				c[i][j] += a[i][k]*b[k][j];                               
+			}          
 		}
 	}
-	#pragma omp barrier
+	
 }
+
 
 void imprimir(int **m, int n){
 	for (int i = 0; i < n; i++){
@@ -60,7 +60,6 @@ int main(int argc, char *argv[]){
 		}
 	}
 	
-
 	begin = clock();
 	multiplicacion(a, b, c, n);
 	end = clock();

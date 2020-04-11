@@ -56,7 +56,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 	
-	omp_set_num_threads(8);
+	omp_set_num_threads(4);
 
 	begin = clock();
 	multiplicacion(a, b, c, n);
@@ -64,7 +64,7 @@ int main(int argc, char *argv[]){
 
 	time = (float)(end-begin);
 	time = time/CLOCKS_PER_SEC;
-	printf("%.6f\n", time/8);
+	printf("%.6f\n", time/4);
 	
 	/*
 	imprimir(a, n);

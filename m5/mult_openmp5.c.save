@@ -1,1 +1,0 @@
-ssh -i "KP_HPCabcd.pem" ubuntu@ec2-54-237-211-53.compute-1.amazonaws.com
